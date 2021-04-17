@@ -1,0 +1,131 @@
+--->>>   Client Post
+
+{
+    "clientNo":"C00007",
+    "name":"Meet Patel",
+    "city":"Bombay",
+    "pincode":"40005099",
+    "state":"Maharashtra",
+    "balanceDue":"000"
+}
+
+
+--->>>Product Post
+
+{
+    "productNo":"P07975",
+    "description":"1.44 Drive",
+    "profilePercent":"5",
+    "unitMeasure":"Piece",
+    "quantityNoHand":"2",
+    "reorderLvl":"3",
+    "sellPrice":"1050",
+    "costPrice":"1000"
+}
+
+--->>> Slaesman Post
+
+{
+    "salesmanNo":"S00004",
+    "salesmanName":"Aashish",
+    "address1":"A/5",
+    "address2":"Juhu",
+    "city":"Bombay",
+    "pincode":"400044",
+    "state":"Maharashtra",
+    "saleAmount":"3500",
+    "tgtToGet":"200",
+    "ytdSales":"150",
+    "remarks":"Good"
+}
+
+--->>> saleOrder Post
+
+{
+    "orderNo":"O19009",
+    "orderDate":"1996-05-24",
+    "clientNo":{ 
+        "clientNo": "C00005",
+        "name": "Basu Navindgi",
+        "address1": null,
+        "address2": null,
+        "city": "Bombay",
+        "pincode": 100001,
+        "state": "Maharashtra",
+        "balanceDue": 2000.0
+    },
+    "delyAddr":"Bombay",
+    "salesmanNo":{
+        "salesmanNo": "S00004",
+        "salesmanName": "Aashish",
+        "address1": "A/5",
+        "address2": "Juhu",
+        "city": "Bombay",
+        "pincode": "400044",
+        "state": "Maharashtra",
+        "saleAmount": 3500.0,
+        "tgtToGet": 200.0,
+        "ytdSales": 150.0,
+        "remarks": "Good"
+    },
+    "delyType":"FULL",
+    "billedYn":"N",
+    "delyDate":"1996-05-26",
+    "orderStatus":"INPROCESS"
+}
+
+
+--->>>SaleOrderDetails Post
+
+{
+    "id":{
+        "orderNo":"O19008",
+        "productNo":"P00001"
+    },
+    "orderNo":{
+        "orderNo": "O19008",
+        "orderDate": "1996-05-24",
+        "clientNo": {
+            "clientNo": "C00005",
+            "name": "Basu Navindgi",
+            "address1": null,
+            "address2": null,
+            "city": "Bombay",
+            "pincode": 100001,
+            "state": "Maharashtra",
+            "balanceDue": 2000.0
+        },
+        "delyAddr": "Bombay",
+        "salesmanNo": {
+            "salesmanNo": "S00004",
+            "salesmanName": "Akshay",
+            "address1": "A/5",
+            "address2": "Juhu",
+            "city": "Bombay",
+            "pincode": "400044",
+            "state": "Maharashtra",
+            "saleAmount": 3500.0,
+            "tgtToGet": 200.0,
+            "ytdSales": 150.0,
+            "remarks": "Good"
+        },
+        "delyType": "FULL",
+        "billedYn": "N",
+        "delyDate": "1996-05-26",
+        "orderStatus": "INPROCESS"
+    },
+    "productNo":{
+        "productNo": "P00001",
+        "description": "1.44 Floppies",
+        "profilePercent": 5.0,
+        "unitMeasure": "Piece",
+        "quantityNoHand": 100,
+        "reorderLvl": 20,
+        "sellPrice": 525.0,
+        "costPrice": 500.0
+    },
+
+    "qtyOrdered":"10",
+    "qtyDisplay":"5",
+    "productRate":"525"
+}
