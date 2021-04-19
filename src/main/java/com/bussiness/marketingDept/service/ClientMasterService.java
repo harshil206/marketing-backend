@@ -3,8 +3,11 @@ package com.bussiness.marketingDept.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
-import com.bussiness.marketingDept.DTO.ClientDTO;
+import com.bussiness.marketingDept.dto.ClientDTO;
+import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
 import com.bussiness.marketingDept.model.ClientMaster;
 import com.bussiness.marketingDept.repository.ClientMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +19,20 @@ public class ClientMasterService {
     @Autowired
     private ClientMasterRepository clientMasterRepository;
 
-    public void saveData(ClientDTO clientDTO){
+    public RequestErrorHandler saveData(ClientDTO clientDTO){
+        RequestErrorHandler requestErrorHandler=new RequestErrorHandler();
         ClientMaster client_master=new ClientMaster();
-        System.out.println("Clients*****"+client_master);
-        client_master.setName(clientDTO.getName());
-        client_master.setClientNo(clientDTO.getClientNo());
-        client_master.setAddress1(clientDTO.getAddress1());
-        client_master.setAddress2(clientDTO.getAddress2());
-        client_master.setPincode(clientDTO.getPincode());
-        client_master.setBalanceDue(clientDTO.getBalanceDue());
-        client_master.setCity(clientDTO.getCity());
-        client_master.setState(clientDTO.getState());
+        client_master=clientDTOtoclientMaster(client_master,clientDTO);
 
-        System.out.println("Clients*****"+client_master);
-        clientMasterRepository.save(client_master);
+        try{
+            clientMasterRepository.save(client_master);
+        }catch (Exception e){
+            requestErrorHandler.setMessage("Some data is left or attribute is left out...");
+            requestErrorHandler.setStatus("500");
+            requestErrorHandler.setId(clientDTO.getClientNo());
+            return requestErrorHandler;
+        }
+        return requestErrorHandler;
     }
 
     public List<ClientDTO> getAllData() {
@@ -38,14 +41,7 @@ public class ClientMasterService {
         clientMasterRepository.findAll().forEach(client->client_masterList.add(client));
         for(ClientMaster client_master:client_masterList){
             ClientDTO client=new ClientDTO();
-            client.setName(client_master.getName());
-            client.setClientNo(client_master.getClientNo());
-            client.setCity(client_master.getCity());
-            client.setAddress1(client_master.getAddress1());
-            client.setAddress2(client_master.getAddress2());
-            client.setBalanceDue(client_master.getBalanceDue());
-            client.setPincode(client_master.getPincode());
-            client.setState(client_master.getState());
+            client=clientMastertoClientDTO(client_master,client);
             clientDTOList.add(client);
         }
 
@@ -56,30 +52,14 @@ public class ClientMasterService {
     public ClientDTO getClientById(String id) {
         ClientDTO clientDTO=new ClientDTO();
         ClientMaster client_master=clientMasterRepository.findById(id).get();
-        clientDTO.setName(client_master.getName());
-        clientDTO.setClientNo(client_master.getClientNo());
-        clientDTO.setCity(client_master.getCity());
-        clientDTO.setAddress1(client_master.getAddress1());
-        clientDTO.setAddress2(client_master.getAddress2());
-        clientDTO.setBalanceDue(client_master.getBalanceDue());
-        clientDTO.setPincode(client_master.getPincode());
-        clientDTO.setState(client_master.getState());
-
+        clientDTO=clientMastertoClientDTO(client_master,clientDTO);
         return clientDTO;
     }
 
     public ClientDTO updateClient(ClientDTO clientDTO) {
         ClientMaster client_master=new ClientMaster();
         System.out.println("Clients*****"+client_master);
-        client_master.setName(clientDTO.getName());
-        client_master.setClientNo(clientDTO.getClientNo());
-        client_master.setAddress1(clientDTO.getAddress1());
-        client_master.setAddress2(clientDTO.getAddress2());
-        client_master.setPincode(clientDTO.getPincode());
-        client_master.setBalanceDue(clientDTO.getBalanceDue());
-        client_master.setCity(clientDTO.getCity());
-        client_master.setState(clientDTO.getState());
-
+        client_master=clientDTOtoclientMaster(client_master,clientDTO);
         System.out.println("Clients*****"+client_master);
         clientMasterRepository.save(client_master);
         
@@ -88,6 +68,32 @@ public class ClientMasterService {
 
     public void deleteClientDataById(String id){
         clientMasterRepository.deleteById(id);
+    }
+
+
+
+    public ClientMaster clientDTOtoclientMaster(ClientMaster client_master,ClientDTO clientDTO){
+        client_master.setName(clientDTO.getName());
+        client_master.setClientNo(clientDTO.getClientNo());
+        client_master.setAddress1(clientDTO.getAddress1());
+        client_master.setAddress2(clientDTO.getAddress2());
+        client_master.setPincode(clientDTO.getPincode());
+        client_master.setBalanceDue(clientDTO.getBalanceDue());
+        client_master.setCity(clientDTO.getCity());
+        client_master.setState(clientDTO.getState());
+        return client_master;
+    }
+
+    public ClientDTO clientMastertoClientDTO(ClientMaster client_master,ClientDTO clientDTO){
+        clientDTO.setName(client_master.getName());
+        clientDTO.setClientNo(client_master.getClientNo());
+        clientDTO.setCity(client_master.getCity());
+        clientDTO.setAddress1(client_master.getAddress1());
+        clientDTO.setAddress2(client_master.getAddress2());
+        clientDTO.setBalanceDue(client_master.getBalanceDue());
+        clientDTO.setPincode(client_master.getPincode());
+        clientDTO.setState(client_master.getState());
+        return clientDTO;
     }
 
 }

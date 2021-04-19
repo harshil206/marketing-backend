@@ -2,7 +2,8 @@ package com.bussiness.marketingDept.controller;
 
 import java.util.List;
 
-import com.bussiness.marketingDept.DTO.SaleOrderDTO;
+import com.bussiness.marketingDept.dto.SaleOrderDTO;
+import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
 import com.bussiness.marketingDept.service.SaleOrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class SaleOrderController {
     private SaleOrderService saleOrderService;
 
     @PostMapping("/create")
-    private void saveData(@RequestBody SaleOrderDTO saleOrderDTO){
-        saleOrderService.saveData(saleOrderDTO);
+    private RequestErrorHandler saveData(@RequestBody SaleOrderDTO saleOrderDTO){
+        return saleOrderService.saveData(saleOrderDTO);
     }
 
     @GetMapping("/retrive")

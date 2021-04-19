@@ -3,7 +3,8 @@ package com.bussiness.marketingDept.controller;
 
 import java.util.List;
 
-import com.bussiness.marketingDept.DTO.ProductDTO;
+import com.bussiness.marketingDept.dto.ProductDTO;
+import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
 import com.bussiness.marketingDept.service.ProductMasterService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +26,8 @@ public class ProductController {
     private ProductMasterService productMasterService;
 
     @PostMapping("/create")
-    public void saveData(@RequestBody ProductDTO productDTO){
-        productMasterService.saveProduct(productDTO);
+    public RequestErrorHandler saveData(@RequestBody ProductDTO productDTO){
+        return productMasterService.saveProduct(productDTO);
     }
 
     @GetMapping("/retrive")

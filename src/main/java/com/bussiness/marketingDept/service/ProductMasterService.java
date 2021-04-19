@@ -3,7 +3,8 @@ package com.bussiness.marketingDept.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.bussiness.marketingDept.DTO.ProductDTO;
+import com.bussiness.marketingDept.dto.ProductDTO;
+import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
 import com.bussiness.marketingDept.model.ProductMaster;
 import com.bussiness.marketingDept.repository.ProductMasterRepository;
 
@@ -16,20 +17,19 @@ public class ProductMasterService {
     @Autowired
     private ProductMasterRepository productMasterRepository;
 
-    public void saveProduct(ProductDTO productDTO){
+    public RequestErrorHandler saveProduct(ProductDTO productDTO){
         ProductMaster productMaster= new ProductMaster();
-
-        productMaster.setProductNo(productDTO.getProductNo());
-        productMaster.setDescription(productDTO.getDescription());
-        productMaster.setCostPrice(productDTO.getCostPrice());
-        productMaster.setProductRate(productDTO.getProductRate());
-        productMaster.setProfilePercent(productDTO.getProfilePercent());
-        productMaster.setQuantityNoHand(productDTO.getQuantityNoHand());
-        productMaster.setReorderLvl(productDTO.getReorderLvl());
-        productMaster.setSellPrice(productDTO.getSellPrice());
-        productMaster.setUnitMeasure(productDTO.getUnitMeasure());
-
-        productMasterRepository.save(productMaster);
+        RequestErrorHandler requestErrorHandler=new RequestErrorHandler();
+        productMaster=productDTOtoProductMaster(productDTO,productMaster);
+        try {
+            productMasterRepository.save(productMaster);
+        }catch (Exception e) {
+            requestErrorHandler.setMessage("Some data is left or attribute is left out...");
+            requestErrorHandler.setStatus("500");
+            requestErrorHandler.setId(productDTO.getProductNo());
+            return requestErrorHandler;
+        }
+        return requestErrorHandler;
     }
 
     
@@ -40,16 +40,7 @@ public class ProductMasterService {
         productMasterRepository.findAll().forEach(product->product_MasterList.add(product));
         for(ProductMaster product_Master:product_MasterList){
             ProductDTO productDTO=new ProductDTO();
-            productDTO.setProductNo(product_Master.getProductNo());
-            productDTO.setDescription(product_Master.getDescription());
-            productDTO.setCostPrice(product_Master.getCostPrice());
-            productDTO.setProductRate(product_Master.getProductRate());
-            productDTO.setProfilePercent(product_Master.getProfilePercent());
-            productDTO.setQuantityNoHand(product_Master.getQuantityNoHand());
-            productDTO.setReorderLvl(product_Master.getReorderLvl());
-            productDTO.setSellPrice(product_Master.getSellPrice());
-            productDTO.setUnitMeasure(product_Master.getUnitMeasure());
-            
+            productDTO=productMasterToProductDTO(productDTO,product_Master);
             productDTOList.add(productDTO);
         }
 
@@ -57,23 +48,26 @@ public class ProductMasterService {
     }
 
     public ProductDTO getProductById(String id){
-            ProductMaster product_Master=productMasterRepository.findById(id).get();
-            ProductDTO productDTO=new ProductDTO();
-            productDTO.setProductNo(product_Master.getProductNo());
-            productDTO.setDescription(product_Master.getDescription());
-            productDTO.setCostPrice(product_Master.getCostPrice());
-            productDTO.setProductRate(product_Master.getProductRate());
-            productDTO.setProfilePercent(product_Master.getProfilePercent());
-            productDTO.setQuantityNoHand(product_Master.getQuantityNoHand());
-            productDTO.setReorderLvl(product_Master.getReorderLvl());
-            productDTO.setSellPrice(product_Master.getSellPrice());
-            productDTO.setUnitMeasure(product_Master.getUnitMeasure()); 
-
-            return productDTO;
+        ProductMaster product_Master=productMasterRepository.findById(id).get();
+        ProductDTO productDTO=new ProductDTO();
+        productMasterToProductDTO(productDTO, product_Master);
+        return productDTO;
     }
 
     public ProductDTO updateProductById(ProductDTO productDTO){
         ProductMaster productMaster= new ProductMaster();
+        productMaster=productDTOtoProductMaster(productDTO,productMaster);
+        productMasterRepository.save(productMaster);
+        
+        return productDTO;
+    }
+
+    public void deleteProductDataById(String id){
+        productMasterRepository.deleteById(id);
+    }
+
+
+    private ProductMaster productDTOtoProductMaster(ProductDTO productDTO,ProductMaster productMaster){
 
         productMaster.setProductNo(productDTO.getProductNo());
         productMaster.setDescription(productDTO.getDescription());
@@ -84,14 +78,20 @@ public class ProductMasterService {
         productMaster.setReorderLvl(productDTO.getReorderLvl());
         productMaster.setSellPrice(productDTO.getSellPrice());
         productMaster.setUnitMeasure(productDTO.getUnitMeasure());
-
-        productMasterRepository.save(productMaster);
-        
-        return productDTO;
+        return productMaster;
     }
 
-    public void deleteProductDataById(String id){
-        productMasterRepository.deleteById(id);
+    private ProductDTO productMasterToProductDTO(ProductDTO productDTO,ProductMaster product_Master){
+        productDTO.setProductNo(product_Master.getProductNo());
+        productDTO.setDescription(product_Master.getDescription());
+        productDTO.setCostPrice(product_Master.getCostPrice());
+        productDTO.setProductRate(product_Master.getProductRate());
+        productDTO.setProfilePercent(product_Master.getProfilePercent());
+        productDTO.setQuantityNoHand(product_Master.getQuantityNoHand());
+        productDTO.setReorderLvl(product_Master.getReorderLvl());
+        productDTO.setSellPrice(product_Master.getSellPrice());
+        productDTO.setUnitMeasure(product_Master.getUnitMeasure());
+        return productDTO;
     }
 
 }

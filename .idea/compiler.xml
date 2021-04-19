@@ -9,8 +9,8 @@
         <module name="BussinessMarketingApp" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="BussinessMarketingApp" target="11" />
+    <bytecodeTargetLevel target="8">
+      <module name="BussinessMarketingApp" target="8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

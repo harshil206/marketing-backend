@@ -4,8 +4,10 @@ package com.bussiness.marketingDept.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "client_master")
 public class ClientMaster {
 
     @Id

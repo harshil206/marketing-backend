@@ -2,7 +2,8 @@ package com.bussiness.marketingDept.controller;
 
 import java.util.List;
 
-import com.bussiness.marketingDept.DTO.SalesmanDTO;
+import com.bussiness.marketingDept.dto.SalesmanDTO;
+import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
 import com.bussiness.marketingDept.service.SalesmanService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,8 @@ public class SalesmanController {
     private SalesmanService salesmanService;
 
     @PostMapping("/create")
-    public void saveSalesmanData(@RequestBody SalesmanDTO salesmanDTO){
-        salesmanService.saveData(salesmanDTO);
+    public RequestErrorHandler saveSalesmanData(@RequestBody SalesmanDTO salesmanDTO){
+        return salesmanService.saveData(salesmanDTO);
     }
 
     @GetMapping("/getallsalesman")

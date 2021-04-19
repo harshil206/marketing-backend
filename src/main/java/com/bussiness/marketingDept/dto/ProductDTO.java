@@ -1,4 +1,4 @@
-package com.bussiness.marketingDept.DTO;
+package com.bussiness.marketingDept.dto;
 
 import java.util.HashSet;
 import java.util.Set;

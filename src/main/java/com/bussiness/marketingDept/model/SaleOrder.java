@@ -11,6 +11,7 @@ import java.util.Set;
 
 
 @Entity
+@Table(name = "sale_order")
 public class SaleOrder {
 
     @Id

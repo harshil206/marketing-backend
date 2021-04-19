@@ -1,4 +1,4 @@
-package com.bussiness.marketingDept.DTO;
+package com.bussiness.marketingDept.dto;
 
 public class SalesmanDTO {
     
