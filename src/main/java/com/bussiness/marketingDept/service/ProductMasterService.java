@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bussiness.marketingDept.DTO.ProductDTO;
-import com.bussiness.marketingDept.model.Product_Master;
+import com.bussiness.marketingDept.model.ProductMaster;
 import com.bussiness.marketingDept.repository.ProductMasterRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ public class ProductMasterService {
     private ProductMasterRepository productMasterRepository;
 
     public void saveProduct(ProductDTO productDTO){
-        Product_Master productMaster= new Product_Master();
+        ProductMaster productMaster= new ProductMaster();
 
         productMaster.setProductNo(productDTO.getProductNo());
         productMaster.setDescription(productDTO.getDescription());
@@ -35,10 +35,10 @@ public class ProductMasterService {
     
     public List<ProductDTO> getAllProduct(){
         List<ProductDTO> productDTOList=new ArrayList<>();
-        List<Product_Master> product_MasterList=new ArrayList<>();
+        List<ProductMaster> product_MasterList=new ArrayList<>();
 
         productMasterRepository.findAll().forEach(product->product_MasterList.add(product));
-        for(Product_Master product_Master:product_MasterList){
+        for(ProductMaster product_Master:product_MasterList){
             ProductDTO productDTO=new ProductDTO();
             productDTO.setProductNo(product_Master.getProductNo());
             productDTO.setDescription(product_Master.getDescription());
@@ -57,7 +57,7 @@ public class ProductMasterService {
     }
 
     public ProductDTO getProductById(String id){
-            Product_Master product_Master=productMasterRepository.findById(id).get();
+            ProductMaster product_Master=productMasterRepository.findById(id).get();
             ProductDTO productDTO=new ProductDTO();
             productDTO.setProductNo(product_Master.getProductNo());
             productDTO.setDescription(product_Master.getDescription());
@@ -73,7 +73,7 @@ public class ProductMasterService {
     }
 
     public ProductDTO updateProductById(ProductDTO productDTO){
-        Product_Master productMaster= new Product_Master();
+        ProductMaster productMaster= new ProductMaster();
 
         productMaster.setProductNo(productDTO.getProductNo());
         productMaster.setDescription(productDTO.getDescription());

@@ -23,13 +23,13 @@ public class SaleOrderDetails{
     @ManyToOne
     @MapsId("orderNo")
     @JoinColumn(name = "order_no")
-    private Sale_Order orderNo;
+    private SaleOrder orderNo;
 
 
     @ManyToOne
     @MapsId("productNo")
     @JoinColumn(name = "product_no")
-    private Product_Master productNo;
+    private ProductMaster productNo;
 
 
 
@@ -45,7 +45,7 @@ public class SaleOrderDetails{
     public SaleOrderDetails() {
     }
 
-    public SaleOrderDetails(ProductOrderedKeys id, Sale_Order orderNo, Product_Master productNo, Integer qtyOrdered, Integer qtyDisplay, Double productRate) {
+    public SaleOrderDetails(ProductOrderedKeys id, SaleOrder orderNo, ProductMaster productNo, Integer qtyOrdered, Integer qtyDisplay, Double productRate) {
         this.id = id;
         this.orderNo = orderNo;
         this.productNo = productNo;
@@ -62,19 +62,19 @@ public class SaleOrderDetails{
         this.id = id;
     }
 
-    public Sale_Order getOrderNo() {
+    public SaleOrder getOrderNo() {
         return this.orderNo;
     }
 
-    public void setOrderNo(Sale_Order orderNo) {
+    public void setOrderNo(SaleOrder orderNo) {
         this.orderNo = orderNo;
     }
 
-    public Product_Master getProductNo() {
+    public ProductMaster getProductNo() {
         return this.productNo;
     }
 
-    public void setProductNo(Product_Master productNo) {
+    public void setProductNo(ProductMaster productNo) {
         this.productNo = productNo;
     }
 
@@ -107,12 +107,12 @@ public class SaleOrderDetails{
         return this;
     }
 
-    public SaleOrderDetails orderNo(Sale_Order orderNo) {
+    public SaleOrderDetails orderNo(SaleOrder orderNo) {
         setOrderNo(orderNo);
         return this;
     }
 
-    public SaleOrderDetails productNo(Product_Master productNo) {
+    public SaleOrderDetails productNo(ProductMaster productNo) {
         setProductNo(productNo);
         return this;
     }

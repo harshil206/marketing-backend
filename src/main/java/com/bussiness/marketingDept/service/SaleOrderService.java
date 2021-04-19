@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bussiness.marketingDept.DTO.SaleOrderDTO;
-import com.bussiness.marketingDept.model.Sale_Order;
+import com.bussiness.marketingDept.model.SaleOrder;
 import com.bussiness.marketingDept.repository.SaleOrderRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ public class SaleOrderService {
 
     public void saveData(SaleOrderDTO saleOrderDTO){
 
-        Sale_Order sale_Order=new Sale_Order();
+        SaleOrder sale_Order=new SaleOrder();
         
         sale_Order.setOrderNo(saleOrderDTO.getOrderNo());
         sale_Order.setClientNo(saleOrderDTO.getClientNo());
@@ -36,10 +36,10 @@ public class SaleOrderService {
 
     public List<SaleOrderDTO> getAllSalesOrder(){
         List<SaleOrderDTO> saleOrderDTOList=new ArrayList<>();
-        List<Sale_Order> saleOrderList=new ArrayList<>();
+        List<SaleOrder> saleOrderList=new ArrayList<>();
         saleOrderRepository.findAll().forEach(saleOrder->saleOrderList.add(saleOrder));
 
-        for(Sale_Order sale_Order:saleOrderList){
+        for(SaleOrder sale_Order:saleOrderList){
             SaleOrderDTO saleOrderDTO=new SaleOrderDTO();
             saleOrderDTO.setOrderNo(sale_Order.getOrderNo());
             saleOrderDTO.setClientNo(sale_Order.getClientNo());
@@ -60,7 +60,7 @@ public class SaleOrderService {
     public SaleOrderDTO getSaleOrderById(String id){
 
         SaleOrderDTO saleOrderDTO=new SaleOrderDTO();
-        Sale_Order sale_Order=saleOrderRepository.findById(id).get();
+        SaleOrder sale_Order=saleOrderRepository.findById(id).get();
         saleOrderDTO.setOrderNo(sale_Order.getOrderNo());
         saleOrderDTO.setClientNo(sale_Order.getClientNo());
         saleOrderDTO.setBilledYn(sale_Order.getBilledYn());
@@ -77,7 +77,7 @@ public class SaleOrderService {
     }
 
     public SaleOrderDTO updateSalesmanById(SaleOrderDTO saleOrderDTO){
-        Sale_Order sale_Order=new Sale_Order();
+        SaleOrder sale_Order=new SaleOrder();
         
         sale_Order.setOrderNo(saleOrderDTO.getOrderNo());
         sale_Order.setClientNo(saleOrderDTO.getClientNo());

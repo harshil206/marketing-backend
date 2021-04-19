@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bussiness.marketingDept.DTO.ClientDTO;
-import com.bussiness.marketingDept.model.Client_master;
+import com.bussiness.marketingDept.model.ClientMaster;
 import com.bussiness.marketingDept.repository.ClientMasterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ public class ClientMasterService {
     private ClientMasterRepository clientMasterRepository;
 
     public void saveData(ClientDTO clientDTO){
-        Client_master client_master=new Client_master();
+        ClientMaster client_master=new ClientMaster();
         System.out.println("Clients*****"+client_master);
         client_master.setName(clientDTO.getName());
         client_master.setClientNo(clientDTO.getClientNo());
@@ -34,9 +34,9 @@ public class ClientMasterService {
 
     public List<ClientDTO> getAllData() {
         List<ClientDTO> clientDTOList=new ArrayList<>();
-        List<Client_master> client_masterList=new ArrayList<>();
+        List<ClientMaster> client_masterList=new ArrayList<>();
         clientMasterRepository.findAll().forEach(client->client_masterList.add(client));
-        for(Client_master client_master:client_masterList){
+        for(ClientMaster client_master:client_masterList){
             ClientDTO client=new ClientDTO();
             client.setName(client_master.getName());
             client.setClientNo(client_master.getClientNo());
@@ -55,7 +55,7 @@ public class ClientMasterService {
 
     public ClientDTO getClientById(String id) {
         ClientDTO clientDTO=new ClientDTO();
-        Client_master client_master=clientMasterRepository.findById(id).get();
+        ClientMaster client_master=clientMasterRepository.findById(id).get();
         clientDTO.setName(client_master.getName());
         clientDTO.setClientNo(client_master.getClientNo());
         clientDTO.setCity(client_master.getCity());
@@ -69,7 +69,7 @@ public class ClientMasterService {
     }
 
     public ClientDTO updateClient(ClientDTO clientDTO) {
-        Client_master client_master=new Client_master();
+        ClientMaster client_master=new ClientMaster();
         System.out.println("Clients*****"+client_master);
         client_master.setName(clientDTO.getName());
         client_master.setClientNo(clientDTO.getClientNo());

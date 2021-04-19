@@ -6,7 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Client_master {
+public class ClientMaster {
 
     @Id
     @Column(name = "Client_no", length = 6)

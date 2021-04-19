@@ -1,7 +1,7 @@
 package com.bussiness.marketingDept.repository;
 
-import com.bussiness.marketingDept.model.Product_Master;
+import com.bussiness.marketingDept.model.ProductMaster;
 import org.springframework.data.repository.CrudRepository;
 
-public interface ProductMasterRepository extends CrudRepository<Product_Master,String> {
+public interface ProductMasterRepository extends CrudRepository<ProductMaster,String> {
 }

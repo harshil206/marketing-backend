@@ -11,7 +11,7 @@ import java.util.Set;
 
 
 @Entity
-public class Sale_Order {
+public class SaleOrder {
 
     @Id
     @Column(length = 6)
@@ -20,15 +20,15 @@ public class Sale_Order {
     private Date orderDate;
 
     
-    @ManyToOne(targetEntity = Client_master.class)
-    private Client_master clientNo;
+    @ManyToOne(targetEntity = ClientMaster.class)
+    private ClientMaster clientNo;
 
     @Column(length = 25)
     private String delyAddr;
 
     
-    @ManyToOne(targetEntity = Salesman_MAster.class)
-    private Salesman_MAster salesmanNo;
+    @ManyToOne(targetEntity = SalesmanMaster.class)
+    private SalesmanMaster salesmanNo;
 
 
     @Enumerated(EnumType.STRING)
@@ -95,11 +95,11 @@ public class Sale_Order {
         this.orderDate = orderDate;
     }
 
-    public Client_master getClientNo() {
+    public ClientMaster getClientNo() {
         return clientNo;
     }
 
-    public void setClientNo(Client_master clientNo) {
+    public void setClientNo(ClientMaster clientNo) {
         this.clientNo = clientNo;
     }
 
@@ -111,11 +111,11 @@ public class Sale_Order {
         this.delyAddr = delyAddr;
     }
 
-    public Salesman_MAster getSalesmanNo() {
+    public SalesmanMaster getSalesmanNo() {
         return salesmanNo;
     }
 
-    public void setSalesmanNo(Salesman_MAster salesmanNo) {
+    public void setSalesmanNo(SalesmanMaster salesmanNo) {
         this.salesmanNo = salesmanNo;
     }
 

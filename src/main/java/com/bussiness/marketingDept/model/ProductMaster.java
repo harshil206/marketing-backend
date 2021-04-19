@@ -12,7 +12,7 @@ import javax.persistence.OneToMany;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Product_Master {
+public class ProductMaster {
 
     @Id
     @Column(length = 6)

@@ -4,11 +4,11 @@ import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.bussiness.marketingDept.model.Client_master;
+import com.bussiness.marketingDept.model.ClientMaster;
 import com.bussiness.marketingDept.model.SaleOrderDetails;
-import com.bussiness.marketingDept.model.Salesman_MAster;
-import com.bussiness.marketingDept.model.Sale_Order.DeliveryType;
-import com.bussiness.marketingDept.model.Sale_Order.OrderStatus;
+import com.bussiness.marketingDept.model.SalesmanMaster;
+import com.bussiness.marketingDept.model.SaleOrder.DeliveryType;
+import com.bussiness.marketingDept.model.SaleOrder.OrderStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class SaleOrderDTO {
@@ -17,11 +17,11 @@ public class SaleOrderDTO {
 
     private Date orderDate;
     
-    private Client_master clientNo;
+    private ClientMaster clientNo;
     
     private String delyAddr;
     
-    private Salesman_MAster salesmanNo;
+    private SalesmanMaster salesmanNo;
     
     private DeliveryType delyType;
     
@@ -76,11 +76,11 @@ public class SaleOrderDTO {
         this.orderDate = orderDate;
     }
 
-    public Client_master getClientNo() {
+    public ClientMaster getClientNo() {
         return clientNo;
     }
 
-    public void setClientNo(Client_master clientNo) {
+    public void setClientNo(ClientMaster clientNo) {
         this.clientNo = clientNo;
     }
 
@@ -92,11 +92,11 @@ public class SaleOrderDTO {
         this.delyAddr = delyAddr;
     }
 
-    public Salesman_MAster getSalesmanNo() {
+    public SalesmanMaster getSalesmanNo() {
         return salesmanNo;
     }
 
-    public void setSalesmanNo(Salesman_MAster salesmanNo) {
+    public void setSalesmanNo(SalesmanMaster salesmanNo) {
         this.salesmanNo = salesmanNo;
     }
 
