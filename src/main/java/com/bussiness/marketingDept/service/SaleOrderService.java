@@ -2,6 +2,7 @@ package com.bussiness.marketingDept.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.bussiness.marketingDept.dto.SaleOrderDTO;
 import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
@@ -50,12 +51,21 @@ public class SaleOrderService {
         return saleOrderDTOList;
     }
 
-    public SaleOrderDTO getSaleOrderById(String id){
+    public String getSaleOrderById(String id){
 
         SaleOrderDTO saleOrderDTO=new SaleOrderDTO();
-        SaleOrder sale_Order=saleOrderRepository.findById(id).get();
-        saleOrderDTO=saleOrdertSaleOderDTO(sale_Order,saleOrderDTO);
-        return saleOrderDTO;
+        Optional<SaleOrder> sale_Order=saleOrderRepository.findById(id);
+        if(sale_Order.isPresent()) {
+            saleOrderDTO = saleOrdertSaleOderDTO(sale_Order.get(), saleOrderDTO);
+            return saleOrderDTO.toString();
+        }else{
+            RequestErrorHandler requestErrorHandler=new RequestErrorHandler();
+            requestErrorHandler.setId(id);
+            requestErrorHandler.setMessage("Error. No such id is present...");
+            requestErrorHandler.setStatus("500");
+            requestErrorHandler.setResult("Error!!!");
+            return requestErrorHandler.toString();
+        }
 
     }
 

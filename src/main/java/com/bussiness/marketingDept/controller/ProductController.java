@@ -38,7 +38,7 @@ public class ProductController {
     }
 
     @GetMapping("/retrivebyid/{id}")
-    public ProductDTO getProductById(@PathVariable String id){
+    public String getProductById(@PathVariable String id){
         return productMasterService.getProductById(id);
     }
 

@@ -112,4 +112,20 @@ public class SalesmanDTO {
         this.remarks = remarks;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "salesmanNo=" + salesmanNo + '\n' +
+                ", salesmanName=" + salesmanName + '\n' +
+                ", address1=" + address1 + '\n' +
+                ", address2=" + address2 + '\n' +
+                ", city=" + city + '\n' +
+                ", pincode=" + pincode + '\n' +
+                ", state=" + state + '\n' +
+                ", saleAmount=" + saleAmount +
+                ", tgtToGet=" + tgtToGet +
+                ", ytdSales=" + ytdSales +
+                ", remarks=" + remarks +
+                '}';
+    }
 }

@@ -34,7 +34,7 @@ public class SalesmanController {
     }
 
     @GetMapping("/getsalesmanbyid/{id}")
-    public SalesmanDTO getSalesman(@PathVariable String id){
+    public String getSalesman(@PathVariable String id){
         return salesmanService.getSalesmanById(id);
     }
 

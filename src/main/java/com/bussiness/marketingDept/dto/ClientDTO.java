@@ -91,9 +91,9 @@ public class ClientDTO {
 
     @Override
     public String toString() {
-        return "ClientDTO [address1=" + address1 + ", address2=" + address2 + ", balanceDue=" + balanceDue + ", city="
+        return "{address1=" + address1 + ", address2=" + address2 + ", balanceDue=" + balanceDue + ", city="
                 + city + ", clientNo=" + clientNo + ", name=" + name + ", pincode=" + pincode + ", state=" + state
-                + "]";
+                + "}";
     }
     
 

@@ -2,6 +2,7 @@ package com.bussiness.marketingDept.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.bussiness.marketingDept.dto.ProductDTO;
 import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
@@ -47,11 +48,23 @@ public class ProductMasterService {
         return productDTOList;
     }
 
-    public ProductDTO getProductById(String id){
-        ProductMaster product_Master=productMasterRepository.findById(id).get();
+    public String getProductById(String id){
         ProductDTO productDTO=new ProductDTO();
-        productMasterToProductDTO(productDTO, product_Master);
-        return productDTO;
+        Optional<ProductMaster> product_Master=productMasterRepository.findById(id);
+
+        if(product_Master.isPresent()) {
+            productMasterToProductDTO(productDTO, product_Master.get());
+            return productDTO.toString();
+        }
+        else
+        {
+            RequestErrorHandler requestErrorHandler=new RequestErrorHandler();
+            requestErrorHandler.setId(id);
+            requestErrorHandler.setMessage("Error. No such id is present...");
+            requestErrorHandler.setStatus("500");
+            requestErrorHandler.setResult("Error!!!");
+            return requestErrorHandler.toString();
+        }
     }
 
     public ProductDTO updateProductById(ProductDTO productDTO){

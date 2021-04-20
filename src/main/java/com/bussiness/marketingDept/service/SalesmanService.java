@@ -2,6 +2,7 @@ package com.bussiness.marketingDept.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.bussiness.marketingDept.dto.SalesmanDTO;
 import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
@@ -47,12 +48,23 @@ public class SalesmanService {
         return salesmanDTOList;
     }
 
-    public SalesmanDTO getSalesmanById(String id){
-        SalesmanMaster salesman_Master =salesmanMasterRepository.findById(id).get();
+    public String getSalesmanById(String id){
         SalesmanDTO salesmanDTO=new SalesmanDTO();
-        salesmanDTO=salesmanTosalemanDTO(salesmanDTO,salesman_Master);
-        return salesmanDTO;
+        Optional<SalesmanMaster> salesman_Master =salesmanMasterRepository.findById(id);
 
+        if(salesman_Master.isPresent())
+        {
+            salesmanTosalemanDTO(salesmanDTO, salesman_Master.get());
+            return salesmanDTO.toString();
+        }
+        else{
+            RequestErrorHandler requestErrorHandler=new RequestErrorHandler();
+            requestErrorHandler.setId(id);
+            requestErrorHandler.setMessage("no such id is present...");
+            requestErrorHandler.setStatus("500");
+            requestErrorHandler.setResult("Error!!!");
+            return requestErrorHandler.toString();
+        }
     }
 
     public SalesmanDTO updateSalesmanById(SalesmanDTO salesmanDTO){

@@ -132,4 +132,19 @@ public class SaleOrderDTO {
         this.orderStatus = orderStatus;
     }
 
+    @Override
+    public String toString() {
+        return "{" +
+                "orderNo=" + orderNo + '\n' +
+                ", orderDate=" + orderDate +
+                ", clientNo=" + clientNo +
+                ", delyAddr=" + delyAddr + '\n' +
+                ", salesmanNo=" + salesmanNo +
+                ", delyType=" + delyType +
+                ", billedYn=" + billedYn +
+                ", delyDate=" + delyDate +
+                ", orderStatus=" + orderStatus +
+                ", orderquantity=" + orderquantity +
+                '}';
+    }
 }

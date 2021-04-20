@@ -49,11 +49,21 @@ public class ClientMasterService {
 
     }
 
-    public ClientDTO getClientById(String id) {
+    public String getClientById(String id) {
         ClientDTO clientDTO=new ClientDTO();
-        ClientMaster client_master=clientMasterRepository.findById(id).get();
-        clientDTO=clientMastertoClientDTO(client_master,clientDTO);
-        return clientDTO;
+        Optional<ClientMaster> client_master=clientMasterRepository.findById(id);
+        if(client_master.isPresent()){
+            clientDTO=clientMastertoClientDTO(client_master.get(),clientDTO);
+            return clientDTO.toString();
+        }
+        else{
+            RequestErrorHandler requestErrorHandler=new RequestErrorHandler();
+            requestErrorHandler.setId(id);
+            requestErrorHandler.setMessage("Error. No such id is present...");
+            requestErrorHandler.setStatus("500");
+            requestErrorHandler.setResult("Error!!!");
+            return requestErrorHandler.toString();
+        }
     }
 
     public ClientDTO updateClient(ClientDTO clientDTO) {

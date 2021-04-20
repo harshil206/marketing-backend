@@ -34,7 +34,7 @@ public class SaleOrderDetailsController {
     }
 
     @GetMapping("/retrivebyid/orderNo/{ord_no}/productNo/{prod_no}")
-    public SaleOrderDetails getDetailsById(@PathVariable(name="ord_no") String orderNo,@PathVariable(name = "prod_no") String productNo){
+    public String getDetailsById(@PathVariable(name="ord_no") String orderNo,@PathVariable(name = "prod_no") String productNo){
     
         return saleOrderDetailService.getById(orderNo,productNo);
 

@@ -36,7 +36,7 @@ public class SaleOrderController {
     }
 
     @GetMapping("/retrivebyid/{id}")
-    public SaleOrderDTO getOrderedDataById(@PathVariable String id){
+    public String getOrderedDataById(@PathVariable String id){
         return saleOrderService.getSaleOrderById(id);
     }
 

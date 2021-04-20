@@ -31,7 +31,7 @@ public class ClientController {
     }
 
     @GetMapping("/retrivebyid/{id}")
-    public ClientDTO getById(@PathVariable String id){
+    public String getById(@PathVariable String id){
         return clientMasterService.getClientById(id);
     }
 

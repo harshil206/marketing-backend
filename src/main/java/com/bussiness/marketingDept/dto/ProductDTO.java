@@ -102,7 +102,23 @@ public class ProductDTO {
         return costPrice;
     }
 
+
     public void setCostPrice(Double costPrice) {
         this.costPrice = costPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "productNo=" + productNo + '\n' +
+                ", description=" + description + '\n' +
+                ", profilePercent=" + profilePercent +
+                ", unitMeasure=" + unitMeasure + '\n' +
+                ", quantityNoHand=" + quantityNoHand +
+                ", reorderLvl=" + reorderLvl +
+                ", sellPrice=" + sellPrice +
+                ", costPrice=" + costPrice +
+                ", productRate=" + productRate +
+                '}';
     }
 }

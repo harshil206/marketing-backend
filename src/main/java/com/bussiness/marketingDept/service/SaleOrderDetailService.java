@@ -1,11 +1,14 @@
 package com.bussiness.marketingDept.service;
 
+import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
 import com.bussiness.marketingDept.model.ProductOrderedKeys;
 import com.bussiness.marketingDept.model.SaleOrderDetails;
 import com.bussiness.marketingDept.repository.SaleOrderDetailsRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class SaleOrderDetailService {
@@ -24,8 +27,20 @@ public class SaleOrderDetailService {
         return saleOrderDetailsRepository.findAll();
     }
 
-    public SaleOrderDetails getById(String orderNo,String productNo){
+    public String getById(String orderNo,String productNo){
         ProductOrderedKeys productOrderedKeys=new ProductOrderedKeys(orderNo,productNo);
-        return saleOrderDetailsRepository.findById(productOrderedKeys).get();
+
+        Optional<SaleOrderDetails> saleOrderDetails=saleOrderDetailsRepository.findById(productOrderedKeys);
+        if(saleOrderDetails.isPresent()){
+            return saleOrderDetails.get().toString();
+        }else {
+            RequestErrorHandler requestErrorHandler=new RequestErrorHandler();
+            requestErrorHandler.setId(orderNo+"  "+productNo);
+            requestErrorHandler.setMessage("Error. No such id is present...");
+            requestErrorHandler.setStatus("500");
+            requestErrorHandler.setResult("Error!!!");
+            return requestErrorHandler.toString();
+        }
+
     }
 }
