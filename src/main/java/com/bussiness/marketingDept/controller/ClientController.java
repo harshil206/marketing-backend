@@ -7,13 +7,13 @@ import com.bussiness.marketingDept.errorHandler.RequestErrorHandler;
 import com.bussiness.marketingDept.model.ClientMaster;
 import com.bussiness.marketingDept.service.ClientMasterService;
 
-import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/client")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ClientController {
 
     @Autowired
@@ -21,11 +21,14 @@ public class ClientController {
 
     @PostMapping(value = "/create",produces = "application/json")
     @ResponseBody()
+    @CrossOrigin(origins = "http://localhost:3000")
     public RequestErrorHandler saveData(@RequestBody ClientDTO clientDTO){
+        System.out.println(clientDTO.toString());
        return clientMasterService.saveData(clientDTO);
     }
 
     @GetMapping("/retrive")
+    @CrossOrigin(origins = "http://localhost:3000")
     public List<ClientDTO> getAllCleint(){
         return clientMasterService.getAllData();
     }
